@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="InfraMIND v3 — Workload-Aware Infrastructure Intelligence Dashboard">
+    <title>InfraMIND v3 | Results Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Background Glow Effects                             -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Navigation Bar                                      -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <nav id="main-nav">
+        <div class="nav-brand">
+            <span class="brand-icon">🧠</span>
+            <span class="brand-text">InfraMIND</span>
+            <span class="brand-version">v3</span>
+        </div>
+        <div class="nav-actions">
+            <label for="file-input" class="btn-load" id="btn-load-results">
+                <span>📂</span> Load Results
+            </label>
+            <input type="file" id="file-input" accept=".json" style="display:none">
+            <button class="btn-demo" id="btn-demo-data">
+                <span>⚡</span> Demo Data
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Hero Header                                         -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <header id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-gradient">Infrastructure Intelligence</span>
+                <span class="hero-sub">Results Dashboard</span>
+            </h1>
+            <p class="hero-description">
+                Workload-Aware, Structure-Learning, Stability-Optimized
+                <br>Bayesian Optimization under High-Dimensional Constraints
+            </p>
+            <div class="hero-stats" id="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-methods">—</span>
+                    <span class="stat-label">Methods</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-workloads">—</span>
+                    <span class="stat-label">Workloads</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-evaluations">—</span>
+                    <span class="stat-label">Evaluations</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-best-cost">—</span>
+                    <span class="stat-label">Best Cost</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Main Dashboard Grid                                 -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <main id="dashboard">
+
+        <!-- Row 1: Pareto Frontier + Convergence -->
+        <section class="panel panel-wide reveal" id="panel-pareto">
+            <div class="panel-header">
+                <h2 class="panel-title">🎯 Pareto Frontier</h2>
+                <p class="panel-subtitle">Cost vs P99 Latency — All Methods</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart-pareto"></canvas>
+            </div>
+        </section>
+
+        <section class="panel reveal" id="panel-convergence">
+            <div class="panel-header">
+                <h2 class="panel-title">📉 Convergence Curves</h2>
+                <p class="panel-subtitle">Objective value over iterations</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart-convergence"></canvas>
+            </div>
+        </section>
+
+        <!-- Row 2: Workload Comparison + Ablation Heatmap -->
+        <section class="panel reveal" id="panel-workload">
+            <div class="panel-header">
+                <h2 class="panel-title">🌊 Workload Comparison</h2>
+                <p class="panel-subtitle">Performance across traffic patterns</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart-workload"></canvas>
+            </div>
+        </section>
+
+        <section class="panel reveal" id="panel-ablation">
+            <div class="panel-header">
+                <h2 class="panel-title">🧪 Ablation Study</h2>
+                <p class="panel-subtitle">Impact of removing each contribution</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart-ablation"></canvas>
+            </div>
+        </section>
+
+        <!-- Row 3: Latency Distribution + Stability -->
+        <section class="panel reveal" id="panel-latency">
+            <div class="panel-header">
+                <h2 class="panel-title">📊 Latency Distribution</h2>
+                <p class="panel-subtitle">P50 / P90 / P99 per method</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart-latency"></canvas>
+            </div>
+        </section>
+
+        <section class="panel reveal" id="panel-stability">
+            <div class="panel-header">
+                <h2 class="panel-title">⚖️ Stability Analysis</h2>
+                <p class="panel-subtitle">Latency variance comparison</p>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart-stability"></canvas>
+            </div>
+        </section>
+
+        <!-- Row 4: Trust Region Dynamics (full width) -->
+        <section class="panel panel-full reveal" id="panel-trust-region">
+            <div class="panel-header">
+                <h2 class="panel-title">🎛️ Trust Region Dynamics</h2>
+                <p class="panel-subtitle">Adaptive trust region evolution over optimization</p>
+            </div>
+            <div class="chart-container chart-container-wide">
+                <canvas id="chart-trust-region"></canvas>
+            </div>
+        </section>
+
+        <!-- Results Summary Table -->
+        <section class="panel panel-full reveal" id="panel-summary">
+            <div class="panel-header">
+                <h2 class="panel-title">📋 Results Summary</h2>
+                <p class="panel-subtitle">Best objective per method per workload</p>
+            </div>
+            <div class="table-container" id="summary-table-container">
+                <p class="placeholder-text">Load experiment results to see the summary table</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- Footer                                              -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <footer id="main-footer">
+        <div class="footer-content">
+            <p>InfraMIND v3 — Research-Grade Infrastructure Intelligence</p>
+            <p class="footer-tech">BoTorch · SimPy · Spectral Clustering · Adaptive TuRBO</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

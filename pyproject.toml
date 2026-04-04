@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "inframind"
+version = "3.0.0"
+description = "Workload-Aware, Structure-Learning, Stability-Optimized Infrastructure Intelligence"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "InfraMIND Research Team"}
+]
+
+[tool.setuptools.packages.find]
+include = ["config*", "workloads*", "embeddings*", "simulator*", "metrics*", "structure_learning*", "optimizer*", "experiments*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
