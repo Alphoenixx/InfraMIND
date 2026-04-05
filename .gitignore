@@ -29,10 +29,10 @@ results/*
 *.csv
 
 # Documentation / Planner Artifacts
-implementation_plan.md
-task.md
-walkthrough.md
-explanation_for_beginners.md
+planning/
+
+# API keys
+api_keys.json
 
 # OS specific
 .DS_Store
